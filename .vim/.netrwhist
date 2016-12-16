@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/lfabbro/Cursus/filler_vog/libft'
-let g:netrw_dirhist_2='/Users/lfabbro/Cursus/Wolf3D/maps'
-let g:netrw_dirhist_3='/Users/lfabbro/Cursus/minishell/includes'
-let g:netrw_dirhist_4='/Users/lfabbro/Cursus/_Github/ft_ls/includes'
