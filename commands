@@ -1,0 +1,4 @@
+# A list of graceful command tools
+
+
+nmcli device wifi list
