@@ -100,6 +100,9 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
+alias cp="cp -i"
+alias rm="rm -i"
+alias ..="cd .."
 alias ls='ls --color=auto'
 alias ls='ls -C -G'
 alias l='ls -l'
