@@ -100,6 +100,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
+alias gap="~/.push.sh"
 alias cp="cp -i"
 alias rm="rm -i"
 alias ..="cd .."
