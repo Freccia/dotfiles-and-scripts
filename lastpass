@@ -1,0 +1,20 @@
+
+Comment sauvegarder lastpass ?
+Avec lastpass cli
+
+# 1) Se connecter avec lastpass cli:
+lpass login prenom.nom@mfglabs.com
+
+# 2) vérifier l'accès
+lpass ls # Liste tout les entrées.
+
+# 3) choisir une méthode de backup :
+
+# 3.1) Export chiffré avec une phrase de passe.
+lpass export --sync=now|gpg --symmetric --verbose --cipher-algo AES --digest-algo SHA512 --output lpassbackup_$(date +'%F-%H-%M').gpg
+
+# 3.2) Export chiffré sur votre clef publique. (où 0x000000000000000000 doit être remplacé par d'ID de votre clef publique où votre mail)
+lpass export --sync=now|gpg --encrypt --recipient 0x000000000000000000 --verbose --cipher-algo AES --digest-algo SHA512 --output lpassbackup_$(date +'%F-%H-%M').gpg
+# Si vous êtes déconnecté et que vous voulez relancer la commande il semble préférable d'ajouter un buffer entre les deux pipe :
+# Sous linux avec la commande buffer : |buffer -p 75 |
+lpass export --sync=now|buffer -p 75 |gpg --encrypt --recipient 0x000000000000000000 --verbose --cipher-algo AES --digest-algo SHA512 --output lpassbackup_$(date +'%F-%H-%M').gpg
