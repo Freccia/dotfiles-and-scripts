@@ -1,0 +1,41 @@
+Tuto chiffrer des fichiers/archives de la manière la plus simple possible.
+
+Cas d'usage : Envois d'une archive par mail en pièce jointe ou encore archive de donnée sensible sur s3. 
+
+Utilisation d'un simple password généré,  ex : JVuT5sXO7kxfivb0 ou une passphrase ex: tsarine infusera frimerez emparer exceptes poserait).
+
+	Le password est transmis / sauvé via un autre medium (Lastpass share par exemple)
+Avec GPG en symétrique (par sur une clef publique)
+# Chiffrer de manière ultra simple :
+	gpg --symmetric --verbose  backup_clefssh.tar.gz
+	Enter passphrase:  #Coller le pass ex:JVuT5sXO7kxfivb0
+	Repeat passphrase: #Coller le pass ex:JVuT5sXO7kxfivb0
+	gpg: using cipher CAST5
+	gpg: writing to `backup_clefssh.tar.gz.gpg'
+# Supprimez le fichier en clair (avec réécriture random)
+	shred -u backup_clefssh.tar.gz
+# ou
+	rm backup_clefssh.tar.gz # non fiable
+# Déchiffrer avec gpg :
+	gpg backup_clefssh.tar.gz.gpg
+	gpg: CAST5 encrypted data
+	Enter passphrase: #Coller le pass ex:JVuT5sXO7kxfivb0
+	gpg: encrypted with 1 passphrase
+	gpg: WARNING: message was not integrity protected
+
+# Résultat dans "backup_clefssh.tar.gz"
+	Avec openssl en symétrique : 
+# Fichier à chiffrer : backup_clefssh.tar.gz
+	openssl aes-256-cbc -e -salt -in backup_clefssh.tar.gz -out backup_clefssh.tar.gz.aes
+	enter aes-256-cbc encryption password:   #Coller le pass ex:JVuT5sXO7kxfivb0
+	Verifying - enter aes-256-cbc encryption password: #Coller le pass ex:JVuT5sXO7kxfivb0
+
+# Supprimez le fichier en clair (avec réécriture random)
+	shred -u backup_clefssh.tar.gz
+# De manière non fiable :
+	rm backup_clefssh.tar.gz
+# Déchiffrer : backup_clefssh.tar.gz.aes
+	openssl aes-256-cbc -d -in backup_clefssh.tar.gz.aes -out backup_clefssh.tar.gz
+	enter aes-256-cbc decryption password: #Coller le pass ex:JVuT5sXO7kxfivb0
+# Autre méthode avec le password en argument (attention il reste en clair dans l'historique du shell .bash_history )
+	openssl aes-256-cbc -d -in backup_clefssh.tar.gz.aes -out backup_clefssh.tar.gz -pass pass:JVuT5sXO7kxfivb0
