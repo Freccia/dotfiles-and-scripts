@@ -23,17 +23,36 @@ if [[ -z $CUR_MAC ]];then
 	exit 1
 fi
 
-printf "Current MAC found: $CUR_MAC\n"
+printf "Current MAC: $CUR_MAC\n"
 
 NEW_MAC=`openssl rand -hex 6 | sed 's/\(..\)/\1:/g;s/.$//'`
-TEST=`echo $NEW_MAC | sed 's/\(..\).*$/\1/g'`
-echo $TEST
 
-#sudo ifconfig $1 down
+# Test if new mac first byte is even
+TEST=`echo $NEW_MAC | sed 's/\(..\).*$/\1/g'`
+
+if [ $(($((16#$TEST))%2)) -eq 1 ]; then
+	NEW_MAC="`echo $NEW_MAC | sed 's/^..\(\(:[0-9a-f]\{2\}\)\{5\}\)/02\1/'`"
+fi
+
+echo "New MAC: $NEW_MAC"
+
+sudo ifconfig $1 down
 
 if [[ $? != 0 ]];then
-	printf "An error occurred. Abort.\n"
+	printf "Failed putting down $1. Abort.\n"
 	exit 1
 fi
 
+sudo ifconfig $1 lladdr $NEW_MAC
 
+if [[ $? != 0 ]];then
+	printf "An error occurred on changing MAC on $1. Abort.\n"
+	exit 1
+fi
+
+sudo ifconfig $1 up
+
+if [[ $? != 0 ]];then
+	printf "Failed getting up $1. Abort.\n"
+	exit 1
+fi
