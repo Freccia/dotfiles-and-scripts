@@ -43,7 +43,10 @@ if [[ $? != 0 ]];then
 	exit 1
 fi
 
-sudo ifconfig $1 lladdr $NEW_MAC
+# OSX
+#sudo ifconfig $1 lladdr $NEW_MAC
+# LINUX
+sudo ifconfig $1 hw ether $NEW_MAC
 
 if [[ $? != 0 ]];then
 	printf "An error occurred on changing MAC on $1. Abort.\n"
