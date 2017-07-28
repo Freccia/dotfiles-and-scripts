@@ -1,0 +1,34 @@
+
+I had same problem, the process must keep alive but the socket must close. Closing a socket in a running process is not impossible but difficult:
+
+    locate the process :
+
+    netstat -np
+
+    You get a source/destination ip:port portstate pid/processname map
+
+    locate the the socket's file descriptor in the process
+
+    lsof -np $pid
+
+    You get a list: process name, pid, user,fileDescriptor, ... a connection string.
+
+    Locate the matching fileDescriptor number for the connection.
+
+    Now connect the process:
+
+    gdb -p $pid
+
+    Now close the socket:
+
+    call close($fileDescritor)
+
+    //does not need ; at end.
+
+    Then detach:
+
+    quit
+
+    And the socket is closed.
+
+
