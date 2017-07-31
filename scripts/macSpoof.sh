@@ -36,7 +36,10 @@ fi
 
 echo "New MAC: $NEW_MAC"
 
-sudo ifconfig $1 down
+# OSX
+#sudo ifconfig $1 down
+# LINUX
+sudo ip link set $1 down
 
 if [[ $? != 0 ]];then
 	printf "Failed putting down $1. Abort.\n"
@@ -46,14 +49,18 @@ fi
 # OSX
 #sudo ifconfig $1 lladdr $NEW_MAC
 # LINUX
-sudo ifconfig $1 hw ether $NEW_MAC
+#sudo ifconfig $1 hw ether $NEW_MAC
+sudo ip link set $1 address $NEW_MAC
 
 if [[ $? != 0 ]];then
-	printf "An error occurred on changing MAC on $1. Abort.\n"
+	printf "An error occurred changing MAC on $1. Abort.\n"
 	exit 1
 fi
 
-sudo ifconfig $1 up
+# OSX
+#sudo ifconfig $1 up
+# LINUX
+sudo ip link set $1 up
 
 if [[ $? != 0 ]];then
 	printf "Failed getting up $1. Abort.\n"
