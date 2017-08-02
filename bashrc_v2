@@ -34,13 +34,52 @@ colors() {
 	done
 }
 
-alias cp='cp -i'
-alias rm='rm -i'
 alias ..='cd ..'
 alias ls='ls -hG'
 alias l='ls -lh'
 alias ll='ls -lha'
 alias la='ls -a'
+alias gap='~/.push.sh'
+
+# Colors
+alias diff='colordiff'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+
+# Prettify
+alias ct='column -t'
+alias dfc='df -hPT | column -t' 
+alias mount='mount | column -t'
+
+# Change directory
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+
+# Date & Time
+alias d='date +%F'
+alias now='date +"%T"'
+alias nowtime=now
+alias nowdate='date +"%m-%d-%Y"'
+
+# Confirmation
+alias cp='cp -i'
+alias ln='ln -i'
+alias mv='mv -i'
+alias rm='rm -i'
+
+# Debian / Ubuntu:
+alias apt-get="sudo apt-get"
+alias updatey="sudo apt-get -y"
+alias update='sudo apt-get update && sudo apt-get upgrade'
+
+# System Uptadates
+# RHEL, CentOS, Fedora
+alias update='yum update'
+alias updatey='yum -y update'
+
 
 [[ -f ~/.extend.bashrc ]] && . ~/.extend.bashrc
 
