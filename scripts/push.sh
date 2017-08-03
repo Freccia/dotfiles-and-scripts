@@ -1,4 +1,4 @@
-#!/zsh/sh/bash
+#!/usr/bin/env bash
 
 
 # Ce script a pour but de vous rendre plus simple la tache recurente du push sur git.

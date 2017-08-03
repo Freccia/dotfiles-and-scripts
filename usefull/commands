@@ -1,0 +1,17 @@
+# A list of graceful command tools
+
+# List wifi access points
+nmcli device wifi list
+
+# Connect/Disconnect network connection
+nmcli c  <down/up>  id  <CONNECTION_ID>
+
+# Show 
+iwlist <device_name> encryption
+
+# To request a new ip from dhcp server
+# Edit the file /var/lib/dhclient/dhclient.leases
+# Release the dhcp lease
+sudo dhclient -r <interface>
+# Request a new lease
+sudo dhclient <interface>
