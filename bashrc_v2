@@ -37,6 +37,10 @@ colors() {
 # Disable Software Flow Control
 # stty -ixon
 
+# VIM::Stdswag
+export USER42=lfabbro
+export MAIL42=lfabbro@student.42.fr
+
 alias ..='cd ..'
 alias ls='ls -hG'
 alias l='ls -lh'

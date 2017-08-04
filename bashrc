@@ -102,6 +102,10 @@ fi
 # disable Software Flow Control
 #stty -ixon
 
+# Vim::Stdswag
+export USER42=lfabbro
+export MAIL42=lfabbro@student.42.fr
+
 # some more ls aliases
 alias gap="~/.push.sh"
 alias cp="cp -i"
