@@ -99,6 +99,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# disable Software Flow Control
+#stty -ixon
+
 # some more ls aliases
 alias gap="~/.push.sh"
 alias cp="cp -i"
