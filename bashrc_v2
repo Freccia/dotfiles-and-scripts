@@ -34,6 +34,9 @@ colors() {
 	done
 }
 
+# Disable Software Flow Control
+# stty -ixon
+
 alias ..='cd ..'
 alias ls='ls -hG'
 alias l='ls -lh'
