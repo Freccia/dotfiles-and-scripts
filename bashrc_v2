@@ -4,6 +4,9 @@
 
 # dont write duplicates nor commands starting with spaces
 HISTCONTROL=ignoreboth
+# infinite bash_history file
+HISTSIZE=infinite
+HISTFILESIZE=infinite
 
 [[ $- != *i* ]] && return
 
