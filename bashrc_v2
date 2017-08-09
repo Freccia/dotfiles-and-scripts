@@ -4,6 +4,9 @@
 
 # dont write duplicates nor commands starting with spaces
 HISTCONTROL=ignoreboth
+# infinite bash_history file
+HISTSIZE=infinite
+HISTFILESIZE=infinite
 
 [[ $- != *i* ]] && return
 
@@ -36,6 +39,10 @@ colors() {
 
 # Disable Software Flow Control
 # stty -ixon
+
+# VIM::Stdswag
+export USER42=lfabbro
+export MAIL42=lfabbro@student.42.fr
 
 alias ..='cd ..'
 alias ls='ls -hG'
