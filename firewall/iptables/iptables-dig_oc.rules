@@ -1,5 +1,5 @@
 
-sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A INPUT -i lo -j DROP
 sudo iptables -A OUTPUT -o lo -j ACCEPT
 
 # module conntrack
