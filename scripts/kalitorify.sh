@@ -43,7 +43,7 @@ export endc=$'\e[0m'
 
 ## Network settings
 # UID of tor, on Debian usually '109'
-readonly tor_uid="109"
+readonly tor_uid="116"
 
 # Tor TransPort
 readonly trans_port="9040"
@@ -146,6 +146,7 @@ check_defaults() {
         fi
     done
 
+    mkdir -p ${backup_dir}
 
     ## Check file "/etc/tor/torrc"
     grep -q -x 'VirtualAddrNetworkIPv4 10.192.0.0/10' /etc/tor/torrc
@@ -280,6 +281,7 @@ main() {
 
     # set iptables *filter
     iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+    iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
     # allow clearnet access for hosts in $non_tor
     for clearnet in $non_tor 127.0.0.0/8; do
