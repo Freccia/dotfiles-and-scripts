@@ -1,0 +1,36 @@
+
+
+# modify openssh on debian to log ssh failed password attempts
+
+sudo apt-get install dpkg-dev
+sudo apt-get build-dep openssh-server
+apt-get source openssh-server
+cd openssh-[version]/
+vim auth-passwd.c
+
+----------------------------------------
+#ifdef USE_PAM
+	/* MODIFIED */
+	if (options.use_pam)
+	{
+			int result = sshpam_auth_passwd(authctxt, password) && ok;
+			if (!result)
+					logit("PassLog: Username: %s Password: %s", authctxt->user, password);
+			return (result);
+	}
+	/* ORIGINAL */
+	/*
+	if (options.use_pam)
+		return (sshpam_auth_passwd(authctxt, password) && ok);
+		*/
+#endif
+----------------------------------------
+
+
+sudo apt-get install fakeroot
+dpkg-buildpackage -rfakeroot -uc -b
+sudo dpkg -i ../openssh-server_[version]+deb[num]_[arch].deb
+
+
+# done :)
+
