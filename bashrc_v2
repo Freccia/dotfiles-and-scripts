@@ -125,6 +125,7 @@ alias l='ls -lh'
 alias ll='ls -lha'
 alias la='ls -a'
 alias gap='~/.push.sh'
+alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
 # Colors
 alias diff='colordiff'
