@@ -116,6 +116,7 @@ alias ls='ls -C -G'
 alias l='ls -l'
 alias ll='ls -al'
 alias la='ls -alA'
+alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
