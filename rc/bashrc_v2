@@ -135,9 +135,9 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 
 # Prettify
-alias ct='column -t'
-alias dfc='df -hPT | column -t' 
-alias mount='mount | column -t'
+#alias ct='column -t'
+#alias dfc='df -hPT | column -t' 
+#alias mount='mount | column -t'
 
 # Change directory
 alias ..='cd ..'
