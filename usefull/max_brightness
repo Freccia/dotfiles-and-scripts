@@ -1,0 +1,7 @@
+#!/bin/false
+
+# identify display
+xrandr -q
+
+# set brightness
+xrandr --output <Video_Out> --brightness <value>
