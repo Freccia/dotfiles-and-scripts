@@ -125,6 +125,7 @@ alias l='ls -lh'
 alias ll='ls -lha'
 alias la='ls -a'
 alias gap='~/.push.sh'
+alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
 # Colors
 alias diff='colordiff'
@@ -134,9 +135,9 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 
 # Prettify
-alias ct='column -t'
-alias dfc='df -hPT | column -t' 
-alias mount='mount | column -t'
+#alias ct='column -t'
+#alias dfc='df -hPT | column -t' 
+#alias mount='mount | column -t'
 
 # Change directory
 alias ..='cd ..'

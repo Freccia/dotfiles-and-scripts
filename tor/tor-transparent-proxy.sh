@@ -3,7 +3,7 @@
 trap 'echo -e "Abort (rc: $?)"' 0
 
 set -o errexit
-#set -o nounset
+set -o nounset
 set -o pipefail
 
 blue='\033[1;94m'
