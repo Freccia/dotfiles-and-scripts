@@ -2,6 +2,10 @@
 # ~/.bashrc
 #
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+
 # dont write duplicates nor commands starting with spaces
 HISTCONTROL=ignoreboth
 # infinite bash_history file
