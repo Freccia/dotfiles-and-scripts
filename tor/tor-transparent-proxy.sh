@@ -3,7 +3,7 @@
 trap 'echo -e "Abort (rc: $?)"' 0
 
 set -o errexit
-set -o nounset
+#set -o nounset
 set -o pipefail
 
 blue='\033[1;94m'
@@ -48,15 +48,33 @@ usage () {
     echo -e "$green option:$blue start stop ...$endc" >&2
 }
 
+iptables-flush-all() {
+echo "Stopping firewall and allowing everyone..."
+ipt="/sbin/iptables"
+## Failsafe - die if /sbin/iptables not found
+[ ! -x "$ipt" ] && { echo "$0: \"${ipt}\" command not found."; exit 1; }
+$ipt -P INPUT ACCEPT
+$ipt -P FORWARD ACCEPT
+$ipt -P OUTPUT ACCEPT
+$ipt -F
+$ipt -X
+$ipt -t nat -F
+$ipt -t nat -X
+$ipt -t mangle -F
+$ipt -t mangle -X
+$ipt iptables -t raw -F
+$ipt -t raw -X
+}
+
 edit_torrc () {
 
     cp -vf /etc/tor/torrc $_backup_dir/torrc.bak 
 
     echo -e "Log notice file $_log_file
-VirtualAddrNetworkIPv4 $_virt_addr
-AutomapHostsOnResolve 1
-TransPort $_trans_port
-DNSPort $_dns_port" > /etc/tor/torrc
+    VirtualAddrNetworkIPv4 $_virt_addr
+    AutomapHostsOnResolve 1
+    TransPort $_trans_port
+    DNSPort $_dns_port" > /etc/tor/torrc
 }
 
 edit_resolv_conf () {
@@ -84,6 +102,8 @@ restore_resolv_conf () {
 restore_iptables_rules () {
 
     #cp -vf $_backup_dir/rules.v4 /etc/iptables/rules.v4
+
+    iptables-flush-all
     iptables-restore < $_backup_dir/rules.v4
 }
 
@@ -91,6 +111,7 @@ tor_start () {
 
     if [ $# -lt 1 ]; then
         echo -e "$green[$red!$green]$red Please specify an interface.$endc" >&2
+        echo -e "$green[$red!$green]$red Options: $endc" >&2
         usage
         exit 1
     fi
@@ -107,13 +128,15 @@ tor_start () {
     echo -e "$red Are you using a server? (y/n) $endc"
     echo -e "$green Don't lock yourself out after the iptables flush $endc"
     read server
-    if [ $server == 'y' ] || [ $server == 'Y' ]; then
+    shopt -s nocasematch
+    if [[ $server == 'Y' ]] || [[ $server == 'Yes' ]]; then
         iptables -P INPUT ACCEPT
         iptables -P OUTPUT ACCEPT
-    elif [ $server != 'n' ] && [ $server != 'N' ];then
+    elif [[ $server != 'N' ]] && [[ $server != 'No' ]];then
         echo -e "$green[$red!$green]$red Mistyped. Abort.$endc" >&2
         exit 1
     fi
+    shopt -u nocasematch
 
     ### flush iptables
     iptables -F
@@ -212,31 +235,31 @@ tor_stop () {
 }
 
 case "$1" in
-	start)
-    tor_start $2
-	;;
-	stop)
-		tor_stop
-	;;
-	change)
-		change
-	;;
-	status)
-		status
-	;;
-	start_mac)
-		start_mac
-	;;
-	stop_mac)
-		stop_mac
-	;;
-	status_mac)
-		status_mac
-	;;
-   *)
-    usage
-    exit 1
-  ;;
+    start)
+        tor_start $2
+        ;;
+    stop)
+        tor_stop
+        ;;
+    change)
+        change
+        ;;
+    status)
+        status
+        ;;
+    start_mac)
+        start_mac
+        ;;
+    stop_mac)
+        stop_mac
+        ;;
+    status_mac)
+        status_mac
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
 esac
 
 echo -e $endc
