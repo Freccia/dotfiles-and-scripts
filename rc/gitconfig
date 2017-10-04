@@ -1,0 +1,26 @@
+[push]
+	default = simple
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
+[alias]
+  st = status
+  co = checkout
+  a = add -A
+  cm = commit -v
+  l = log
+  d = diff
+  cl = clone
+  br = branch
+  ls = ls-files
+  rb = rebase
+  amend = commit --amend
+  am = commit --amend
+  rb = rebase
+[diff]
+    algorithm = patience
+[rerere]
+    enabled = 1
