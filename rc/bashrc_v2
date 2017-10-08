@@ -21,7 +21,7 @@ if [ "$TERM" != "dumb" ]; then
  if [ $(uname) == "Linux"  ]; then
    # Linux
    alias ls='ls --color=auto'
-   export LS_COLORS='di=34:fi=0:ln=95:pi=5:so=5:bd=5:cd=5:or=37:mi=0:ex=31:*.rpm=90'
+   export LS_COLORS='di=34:fi=0:ln=95:pi=5:so=5:bd=5:cd=1;5:or=1;37:mi=0:ex=31:*.rpm=90'
  else
    # OS X   
    alias ls='ls -G'
@@ -115,7 +115,7 @@ function parse_git_dirty {
 
 #export PS1="\u\[\e[32m\]@\[\e[m\]\h\[\e[32m\][\[\e[m\]\[\e[34;40m\]\W\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[31m\]\`parse_git_branch\`\[\e[m\] "
 
-export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\][\[\e[34m\]\W\[\e[m\]]\[\e[31m\]\`parse_git_branch\`\[\e[m\] \`nonzero_return\`$ "
+export PS1="\[\e[1;32m\]\u\[\e[m\]@\[\e[1;32m\]\h\[\e[m\][\[\e[1;34m\]\W\[\e[m\]]\[\e[1;31m\]\`parse_git_branch\`\[\e[m\] \`nonzero_return\`$ "
 
 # Disable Software Flow Control
 # stty -ixon
@@ -131,8 +131,17 @@ alias la='ls -a'
 alias gap='~/.push.sh'
 alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
 
+# Man Pages Colors
+export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode - red
+export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode - bold, magenta
+export LESS_TERMCAP_me=$(printf '\e[0m') # turn off all appearance modes (mb, md, so, us)
+export LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode    
+export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode - yellow
+export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
+export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode - cyan
+
 # Colors
-alias diff='colordiff'
+alias diff='diff --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
