@@ -16,7 +16,8 @@ fi
 # Fingerprint :
 # Primary key fingerprint: 14F2 6682 D091 6CDD 81E3  7B6D 61B7 B526 D98F 0353
 #     Subkey fingerprint: DCEA C5D9 6135 B91C 4EA6  72AB BBBE BDBB 24C6 F355
-# gpg --receive-keys 0x14F26682D0916CDD81E37B6D61B7B526D98F0353
+echo "gpg --keyserver pgp.mit.edu --receive-keys 0x14F26682D0916CDD81E37B6D61B7B526D98F0353"
+gpg --keyserver pgp.mit.edu --receive-keys 0x14F26682D0916CDD81E37B6D61B7B526D98F0353
 gpg2  --verify firefox-${v}.tar.bz2.asc firefox-${v}.tar.bz2
 mkdir -p /opt/firefox_release/
 rm -rf -- /opt/firefox_release/* ||true
