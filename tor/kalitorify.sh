@@ -43,7 +43,7 @@ export endc=$'\e[0m'
 
 # Safety options
 set -o nounset
-set -o errexit
+#set -o errexit
 set -o pipefail
 
 ## Network settings
@@ -65,6 +65,8 @@ readonly non_tor="127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16"
 
 # Directory where put backups of system default files
 readonly backup_dir="/opt/kalitorify/backups"
+readonly bkp_rules_v4="iptables.bak"
+readonly bkp_rules_v6="ip6tables.bak"
 
 
 # print banner
@@ -228,7 +230,7 @@ main() {
 
     printf "\\n${blue}%s${endc} ${green}%s${endc}\\n" "::" "Starting Transparent Proxy"
     disable_ufw
-    sleep 3
+    sleep 2
 
     # start tor.service
     printf "${blue}%s${endc} ${green}%s${endc}\n" "::" "Start Tor service... "
@@ -237,14 +239,15 @@ main() {
             "[ failed ] systemd error, exit!"
         exit 1
     fi
-    sleep 6
+    sleep 2
    	printf "${cyan}%s${endc} ${green}%s${endc}\\n" "[ ok ]" "Tor service is active"
 
 
     ## Begin iptables settings
     # save current iptables rules
     printf "${blue}%s${endc} ${green}%s${endc}" "::" "Backup iptables rules... "
-    iptables-save > "$backup_dir/iptables.backup"
+    iptables-save > "$backup_dir/${bkp_rules_v4}"
+    ip6tables-save > "$backup_dir/${bkp_rules_v6}"
     printf "${white}%s${endc}\\n" "Done"
     sleep 2
 
@@ -252,6 +255,12 @@ main() {
     printf "${blue}%s${endc} ${green}%s${endc}" "::" "Flush iptables rules... "
     iptables -F
     iptables -t nat -F
+    ip6tables -F
+    ip6tables -t nat -F
+    # Disable ipv6 (for now)
+    ip6tables -P INPUT DROP
+    ip6tables -P FORWARD DROP
+    ip6tables -P OUTPUT DROP
     printf "${white}%s${endc}\\n" "Done"
 
     # configure system's DNS resolver to use Tor's DNSPort on the loopback interface
@@ -325,7 +334,8 @@ stop() {
 
     # restore iptables
     printf "${blue}%s${endc} ${green}%s${endc}" "::" "Restore the default iptables rules... "
-    iptables-restore < "$backup_dir/iptables.backup"
+    iptables-restore < "$backup_dir/${bkp_rules_v4}"
+    ip6tables-restore < "$backup_dir/${bkp_rules_v4}"
     printf "${white}%s${endc}\\n" "Done"
     sleep 2
 
@@ -429,7 +439,7 @@ help_menu() {
     exit 0
 }
 
-
+set +o nounset
 ## cases user input
 case "$1" in
     --start)
