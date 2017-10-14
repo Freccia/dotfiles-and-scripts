@@ -5,6 +5,9 @@
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Disable Ctrl-S
+stty -ixon
+
 #----------------------------------------------------------------
 # LS COLORS
 # don't do this for dumb terminals
