@@ -41,9 +41,14 @@ export white=$'\e[0;97m'
 export cyan=$'\e[0;96m'
 export endc=$'\e[0m'
 
+# Safety options
+set -o nounset
+set -o errexit
+set -o pipefail
+
 ## Network settings
 # UID of tor, on Debian usually '109'
-readonly tor_uid="116"
+readonly tor_uid="$(id -u debian-tor)"
 
 # Tor TransPort
 readonly trans_port="9040"
