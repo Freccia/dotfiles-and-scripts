@@ -2,6 +2,12 @@
 
 trap 'echo -e "Abort (rc: $?)"' 0
 
+if [ "$(uname -s)" != "Linux" ] || 
+    [ -z "$(uname -v) | grep 'Debian'" ];then
+    echo "This script has to run on Debian Linux."
+    exit 1
+fi
+
 set -o errexit
 set -o nounset
 set -o pipefail

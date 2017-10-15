@@ -1,3 +1,7 @@
+# This is Git's per-user configuration file.
+[user]
+	name = fxrc
+  email = Freccia@users.noreply.github.com
 [push]
 	default = simple
 [color]
@@ -24,3 +28,4 @@
     algorithm = patience
 [rerere]
     enabled = 1
+
