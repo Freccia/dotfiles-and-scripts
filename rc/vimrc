@@ -4,6 +4,7 @@ filetype plugin on
 filetype indent on
 
 set mouse=a
+set mousefocus
 set number
 
 set shiftwidth=4
@@ -19,6 +20,7 @@ set autoindent
 
 syntax on
 colorscheme elflord
+colorscheme gotham256
 
 set wildmenu
 set wildmode=longest,full

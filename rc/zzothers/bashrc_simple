@@ -2,18 +2,22 @@
 # ~/.bashrc
 #
 
+# Disable Software Flow Control
 # Disable Ctrl-S
 stty -ixon
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# VIM::Stdswag
+export USER42=lfabbro
+export MAIL42=lfabbro@student.42.fr
 
 # dont write duplicates nor commands starting with spaces
 HISTCONTROL=ignoreboth
 # infinite bash_history file
-HISTSIZE=infinite
-HISTFILESIZE=infinite
+HISTSIZE="Infinite"
+HISTFILESIZE="Infinite"
 
 [[ $- != *i* ]] && return
 
@@ -63,12 +67,14 @@ colors() {
 	done
 }
 
+# For the Prompt
 function nonzero_return() {
   RETVAL=$?
   [ $RETVAL -ne 0 ] && echo "$RETVAL"
 }
 
-
+# ----------------------------------------------------------------------------
+# GIT Functions
 # get current branch in git repo
 function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
@@ -115,25 +121,11 @@ function parse_git_dirty {
 		echo ""
 	fi
 }
-
-#export PS1="\u\[\e[32m\]@\[\e[m\]\h\[\e[32m\][\[\e[m\]\[\e[34;40m\]\W\[\e[m\]\[\e[32m\]]\[\e[m\]\[\e[31m\]\`parse_git_branch\`\[\e[m\] "
+# ----------------------------------------------------------------------------
 
 export PS1="\[\e[1;32m\]\u\[\e[m\]@\[\e[1;32m\]\h\[\e[m\][\[\e[1;34m\]\W\[\e[m\]]\[\e[1;31m\]\`parse_git_branch\`\[\e[m\] \`nonzero_return\`$ "
 
-# Disable Software Flow Control
-# stty -ixon
-
-# VIM::Stdswag
-export USER42=lfabbro
-export MAIL42=lfabbro@student.42.fr
-
-alias ..='cd ..'
-alias l='ls -lh'
-alias ll='ls -lha'
-alias la='ls -a'
-alias gap='~/.push.sh'
-alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
-
+# ------------------------------------------------------------------
 # Man Pages Colors
 export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode - red
 export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode - bold, magenta
@@ -142,6 +134,17 @@ export LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
 export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode - yellow
 export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
 export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode - cyan
+
+# ------------------------------------------------------------------
+# Aliases
+
+alias gap='~/.push.sh'
+alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip'
+
+alias ..='cd ..'
+alias l='ls -lh'
+alias ll='ls -lha'
+alias la='ls -a'
 
 # Colors
 alias diff='diff --color=auto'
