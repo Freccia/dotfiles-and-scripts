@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# NOT ALREADY CHECKED
+echo "NOT ALREADY CHECKED"
+exit 1
+
 #### USAGE	####
 cat > /etc/firewall.d/1_nginx.conf <<EOF 
 		/sbin/iptables -A  INPUT -p tcp --dport 80 - j ACCEPT 
