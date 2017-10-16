@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Set properties for touchpad on Linux
+
 # More info:
 # xinput --list-props "SynPS/2 Synaptics TouchPad"
 

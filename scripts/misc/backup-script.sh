@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# tomash RUSH backup script
+
 set -e
 set -x
 DIR=/home/root/BACKUP/karbon

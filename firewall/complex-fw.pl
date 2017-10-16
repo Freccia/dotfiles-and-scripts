@@ -1,5 +1,8 @@
 #!/usr/bin/perl -wU
 
+printf("NOT ALREADY CHECKED");
+exit(FALSE);
+
 use 5.010;
 use threads;
 use Pod::Usage;
