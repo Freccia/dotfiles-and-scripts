@@ -66,6 +66,12 @@ case "$TERM" in
     xterm-256color) color_prompt=yes;;
 esac
 
+# For the Prompt
+function nonzero_return() {
+  RETVAL=$?
+  [ $RETVAL -ne 0 ] && echo "$RETVAL"
+}
+
 # ----------------------------------------------------------------------------
 # GIT functions
 # get current branch in git repo
@@ -135,8 +141,8 @@ fi
 
 if [ "$color_prompt" = yes ]; then
 	# Old prompt
-    #PS1='${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]\[\e[1;31m\]\`parse_git_branch\`\[\e[m\] \`nonzero_return\`\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\e[1;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]\$ '
+     PS1='${debian_chroot:+($debian_chroot)}\[\e[1;38;5;111m\]\u@\h\[\e[00m\]:\[\e[01;38;5;45m\]\w\[\e[00m\]'"\[\e[1;38;5;124m\]\`parse_git_branch\`\[\e[m\] \`nonzero_return\`\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
