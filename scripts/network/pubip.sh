@@ -8,10 +8,11 @@
 #    http://ipogre.com
 #    http://indent.me
 #    http://bot.whatismyipaddress.com
+#    wget http://ipecho.net/plain -O - -q ; echo
 #
 
-wget http://ipecho.net/plain -O - -q ; echo
-
+# Reliable method
+dig +short myip.opendns.com @resolver1.opendns.com
 
 if [ $# -gt 0 ];then
 		if [ $1 == "-full" ];then
