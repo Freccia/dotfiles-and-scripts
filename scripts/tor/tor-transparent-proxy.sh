@@ -249,6 +249,8 @@ case "$1" in
         ;;
     change)
         change
+        # TODO
+        echo "Not implemented yet."
         ;;
     status)
         status
