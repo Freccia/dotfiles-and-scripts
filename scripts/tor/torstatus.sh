@@ -2,8 +2,11 @@
 
 #Get ip info
 
+torstatus=/tmp/torstatus
+
 curl https://check.torproject.org | \
-    grep -ie "Congratulations" -e "Your IP" | sed 's/<[^>]*>//g' | sed 's/^ *//' | uniq
+    grep -ie "Congratulations" -e "Sorry" -e "Your IP" | \
+    sed 's/<[^>]*>//g' | sed 's/^ *//' | uniq
 
 exit 0
 
