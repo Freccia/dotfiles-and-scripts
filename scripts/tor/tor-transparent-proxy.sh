@@ -68,7 +68,7 @@ $ipt -t nat -F
 $ipt -t nat -X
 $ipt -t mangle -F
 $ipt -t mangle -X
-$ipt iptables -t raw -F
+$ipt -t raw -F
 $ipt -t raw -X
 }
 
@@ -249,6 +249,8 @@ case "$1" in
         ;;
     change)
         change
+        # TODO
+        echo "Not implemented yet."
         ;;
     status)
         status
