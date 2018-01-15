@@ -8,14 +8,14 @@ let s:_42 = [
 			\"    ###   ########.fr    "
 			\]
 
-let s:stylebegin = '/*'
-let s:styleend = '*/'
+let s:stylebegin = '/* '
+let s:styleend = ' */'
 
 ""TODO what this variable? How does it works? What's the $ at the end of extensions?
 let s:styles = [
 			\{
 			\'extensions': ['\.c$', '\.h$', '\.cc$', '\.cpp$', '\.hpp$', '\.cs$', '\.css'],
-			\'start': '/*', 'end': '*/', 'fill': '*'
+			\'start': '/* ', 'end': ' */', 'fill': '*'
 			\},
 			\{
 			\'extensions': ['\Makefile', '\make', '\makefile'],

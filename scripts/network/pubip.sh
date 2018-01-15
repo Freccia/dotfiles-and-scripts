@@ -12,7 +12,7 @@
 #
 
 # Reliable method
-dig +short myip.opendns.com @resolver1.opendns.com
+#dig +short myip.opendns.com @resolver1.opendns.com
 
 if [ $# -gt 0 ];then
 		if [ $1 == "-full" ];then
@@ -20,4 +20,6 @@ if [ $# -gt 0 ];then
 		else
 				echo "Usage: ./pubip.sh [-full]"
 		fi
+else
+    wget http://ipecho.net/plain -O - -q ; echo
 fi
